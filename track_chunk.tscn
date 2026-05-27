@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bo6taa14kk47e"]
+
+[ext_resource type="Script" path="res://track_chunk.gd" id="1_chunk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(10, 0.2, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(10, 0.2, 20)
+
+[node name="TrackChunk" type="StaticBody3D"]
+script = ExtResource("1_chunk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_floor")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_floor")

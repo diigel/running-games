@@ -56,9 +56,10 @@ func _handle_input() -> void:
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= GRAVITY * delta
-	elif state == State.JUMPING:
-		# Landed — return to RUNNING
-		state = State.RUNNING
+	else:
+		velocity.y = 0.0   # clear accumulated fall velocity on landing
+		if state == State.JUMPING:
+			state = State.RUNNING
 
 
 func _tick_slide(delta: float) -> void:

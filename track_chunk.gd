@@ -3,6 +3,7 @@ extends StaticBody3D
 # Loaded at spawn time — missing paths are skipped gracefully
 const OBSTACLE_PATHS: Array[String] = [
 	"res://obstacle_high.tscn",
+	"res://obstacle_high.tscn",   # double weight → ~50% spawn rate
 	"res://obstacle_low.tscn",
 	"res://obstacle_double.tscn",
 ]

@@ -1,32 +1,29 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmainscene0001"]
+[gd_scene format=3 uid="uid://dq03bpau6seom"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_main"]
-[ext_resource type="PackedScene" uid="uid://crunning_player" path="res://player.tscn" id="2_player"]
-[ext_resource type="PackedScene" uid="uid://bhudscene0001" path="res://hud.tscn" id="3_hud"]
+[ext_resource type="PackedScene" uid="uid://cickfibgry075" path="res://player.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bhudscene0001" path="res://hud.tscn" id="3_h2yge"]
 
 [sub_resource type="Environment" id="Environment_1"]
-background_mode = 1
-background_color = Color(0.4, 0.6, 0.9, 1)
-ambient_light_source = 1
+ambient_light_source = 2
 ambient_light_color = Color(1, 1, 1, 1)
-ambient_light_energy = 0.5
+ambient_light_energy = 0.4
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node" unique_id=303959518]
 script = ExtResource("1_main")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 8)
+[node name="Player" parent="." unique_id=138328431 instance=ExtResource("2_0xm2m")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 5)
-light_energy = 1.2
-shadow_enabled = true
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1788246040]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1")
 
-[node name="Player" parent="." instance=ExtResource("2_player")]
+[node name="TrackSpawner" type="Node3D" parent="." unique_id=1557684892]
 
-[node name="TrackSpawner" type="Node3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, -0.707, 0, 0.707, 0.707, 0, 20, 0)
+light_energy = 2.0
+directional_shadow_mode = 2
 
-[node name="HUD" parent="." instance=ExtResource("3_hud")]
+[node name="HUD" parent="." unique_id=1220291410 instance=ExtResource("3_h2yge")]

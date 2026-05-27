@@ -18,6 +18,7 @@ func update_score(value: int) -> void:
 func show_game_over(final_score: int) -> void:
 	final_score_label.text = "Score: %d" % final_score
 	game_over_panel.show()
+	restart_button.grab_focus()
 
 
 func _on_restart_pressed() -> void:

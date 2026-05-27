@@ -28,8 +28,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	_handle_input()
 	_apply_gravity(delta)
+	_handle_input()
 	_tick_slide(delta)
 	_smooth_lane()
 	velocity.z = z_speed

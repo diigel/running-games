@@ -10,7 +10,17 @@ const LANE_POSITIONS: Array[float] = [-3.0, 0.0, 3.0]
 const CHUNK_LENGTH: float = 20.0
 const DELETE_BUFFER: float = 30.0   # units behind player before deletion
 
+# Grass green — no texture needed, just a rich flat color
+const GRASS_COLOR: Color = Color(0.18, 0.52, 0.1, 1.0)
+
 var player: CharacterBody3D = null
+
+
+func _ready() -> void:
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = GRASS_COLOR
+	mat.roughness = 0.85   # matte, not shiny
+	$MeshInstance3D.material_override = mat
 
 
 func setup(player_ref: CharacterBody3D, grace: bool = false) -> void:

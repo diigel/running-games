@@ -20,7 +20,7 @@ var next_chunk_z: float = 0.0
 @onready var player: CharacterBody3D = $Player
 @onready var camera: Camera3D = $Camera3D
 @onready var track_spawner: Node3D = $TrackSpawner
-@onready var hud = $HUD
+@onready var hud: CanvasLayer = $HUD
 
 
 func _ready() -> void:

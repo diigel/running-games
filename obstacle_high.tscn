@@ -1,20 +1,20 @@
 [gd_scene format=3 uid="uid://bwwd6nkdo2xeu"]
 
-[ext_resource type="Script" path="res://obstacle.gd" id="1_obs"]
+[ext_resource type="Script" uid="uid://r0eo47im40ms" path="res://obstacle.gd" id="1_obs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_high"]
-size = Vector3(2.5, 4.0, 1.0)
+size = Vector3(2.5, 1.4, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_high"]
-size = Vector3(2.5, 4.0, 1.0)
+size = Vector3(2.5, 1.4, 1)
 
-[node name="ObstacleHigh" type="Area3D"]
+[node name="ObstacleHigh" type="Area3D" unique_id=1071663265]
 script = ExtResource("1_obs")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-position = Vector3(0, 3.6, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1229821190]
+position = Vector3(0, 0.7, 0)
 shape = SubResource("BoxShape3D_high")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-position = Vector3(0, 3.6, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1681728045]
+position = Vector3(0, 0.7, 0)
 mesh = SubResource("BoxMesh_high")

@@ -57,6 +57,6 @@ func _spawn_obstacle() -> void:
 		lane_x = LANE_POSITIONS[randi() % LANE_POSITIONS.size()]
 
 	# Offset into the back half of the chunk so player has reaction time
-	var z_local: float = randf_range(-CHUNK_LENGTH * 0.35, CHUNK_LENGTH * 0.1)
+	var z_local: float = randf_range(-CHUNK_LENGTH * 0.45, -CHUNK_LENGTH * 0.25)
 	obstacle.position = Vector3(lane_x, 0.0, z_local)
 	add_child(obstacle)

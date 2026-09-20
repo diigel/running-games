@@ -6,15 +6,8 @@
 radius = 0.3
 height = 1.8
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_1"]
-radius = 0.3
-height = 1.8
-
 [node name="Player" type="CharacterBody3D" unique_id=138328431]
 script = ExtResource("1_player")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2023965752]
 shape = SubResource("CapsuleShape3D_1")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=245626774]
-mesh = SubResource("CapsuleMesh_1")

@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bwwd6nkdtafwu"]
+
+; Overhead bar — must be SLID under.
+; bottom = 1.1 world, sliding player top = SLIDE_HEIGHT = 0.9 → 0.2 clearance.
+; Standing player top = 1.8 and jump apex 1.6 both intersect it → slide is the only way through.
+
+[ext_resource type="Script" uid="uid://r0eo47im40ms" path="res://obstacle.gd" id="1_obs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_slide"]
+size = Vector3(2.5, 1.0, 1.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_slide"]
+size = Vector3(2.5, 1.0, 1.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_post"]
+size = Vector3(0.18, 2.1, 0.18)
+
+[node name="ObstacleSlide" type="Area3D" unique_id=1649898106]
+script = ExtResource("1_obs")
+accent_color = Color(0.1, 0.75, 0.95, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1433722096]
+position = Vector3(0, 1.6, 0)
+shape = SubResource("BoxShape3D_slide")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1431167340]
+position = Vector3(0, 1.6, 0)
+mesh = SubResource("BoxMesh_slide")
+
+[node name="PostL" type="MeshInstance3D" parent="."]
+position = Vector3(-1.34, 1.05, 0)
+mesh = SubResource("BoxMesh_post")
+
+[node name="PostR" type="MeshInstance3D" parent="."]
+position = Vector3(1.34, 1.05, 0)
+mesh = SubResource("BoxMesh_post")

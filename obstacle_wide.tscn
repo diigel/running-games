@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bobstacledbl1"]
+
+; Two-lane-wide ground block — must be JUMPED, or dodged into the free lane.
+; top = 1.2 world, same clearance as obstacle_jump (apex 1.6).
+
+[ext_resource type="Script" uid="uid://r0eo47im40ms" path="res://obstacle.gd" id="1_obs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wide"]
+size = Vector3(6.5, 1.2, 1.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wide"]
+size = Vector3(6.5, 1.2, 1.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wide_cap"]
+size = Vector3(6.7, 0.12, 1.2)
+
+[node name="ObstacleWide" type="Area3D"]
+script = ExtResource("1_obs")
+accent_color = Color(0.95, 0.75, 0.1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.6, 0)
+shape = SubResource("BoxShape3D_wide")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.6, 0)
+mesh = SubResource("BoxMesh_wide")
+
+[node name="Cap" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.22, 0)
+mesh = SubResource("BoxMesh_wide_cap")

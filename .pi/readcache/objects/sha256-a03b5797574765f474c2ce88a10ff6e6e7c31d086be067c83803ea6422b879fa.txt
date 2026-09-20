@@ -9,9 +9,6 @@ const GRAVITY: float = 20.0
 const SLIDE_DURATION: float = 0.9
 const NORMAL_HEIGHT: float = 1.8
 const SLIDE_HEIGHT: float = 0.9
-const LEAN_ANGLE: float = 0.30        # radians of bank while changing lanes
-const LEAN_SPEED: float = 10.0
-const BODY_COLOR: Color = Color(0.95, 0.97, 1.0)
 
 var z_speed: float = -10.0      # set by GameManager every frame
 var current_lane: int = 1
@@ -29,24 +26,12 @@ func _ready() -> void:
 	mesh_inst.position.y = NORMAL_HEIGHT / 2.0
 	add_to_group("player")
 
-	var mat := StandardMaterial3D.new()
-	mat.albedo_color = BODY_COLOR
-	mat.roughness = 0.35
-	mat.metallic = 0.15
-	mat.rim_enabled = true
-	mat.rim = 0.8
-	mat.emission_enabled = true
-	mat.emission = Color(0.35, 0.65, 1.0)
-	mat.emission_energy_multiplier = 0.25
-	mesh_inst.material_override = mat
-
 
 func _physics_process(delta: float) -> void:
 	_apply_gravity(delta)
 	_handle_input()
 	_tick_slide(delta)
 	_smooth_lane()
-	_tick_lean(delta)
 	velocity.z = z_speed
 	move_and_slide()
 
@@ -90,11 +75,6 @@ func _smooth_lane() -> void:
 	# Proportional velocity gives ease-out naturally
 	velocity.x = (target_x - position.x) * LANE_SWITCH_SPEED
 
-
-func _tick_lean(delta: float) -> void:
-	# Bank into the turn: purely cosmetic, driven by sideways velocity.
-	var target: float = -clampf(velocity.x / (LANE_SWITCH_SPEED * 0.5), -1.0, 1.0) * LEAN_ANGLE
-	mesh_inst.rotation.z = lerpf(mesh_inst.rotation.z, target, min(1.0, LEAN_SPEED * delta))
 
 func _start_slide() -> void:
 	state = State.SLIDING

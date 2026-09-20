@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bwwd6nkdo2xeu"]
+
+; Ground-standing block — must be JUMPED over.
+; top = 1.2 world, jump apex = JUMP_FORCE^2/(2*GRAVITY) = 1.6 → 0.4 clearance.
+
+[ext_resource type="Script" uid="uid://r0eo47im40ms" path="res://obstacle.gd" id="1_obs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jump"]
+size = Vector3(2.5, 1.2, 1.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jump"]
+size = Vector3(2.5, 1.2, 1.0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jump_cap"]
+size = Vector3(2.7, 0.12, 1.2)
+
+[node name="ObstacleJump" type="Area3D" unique_id=1071663265]
+script = ExtResource("1_obs")
+accent_color = Color(0.95, 0.35, 0.15, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1229821190]
+position = Vector3(0, 0.6, 0)
+shape = SubResource("BoxShape3D_jump")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1681728045]
+position = Vector3(0, 0.6, 0)
+mesh = SubResource("BoxMesh_jump")
+
+[node name="Cap" type="MeshInstance3D" parent="."]
+position = Vector3(0, 1.22, 0)
+mesh = SubResource("BoxMesh_jump_cap")

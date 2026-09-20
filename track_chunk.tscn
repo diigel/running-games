@@ -15,7 +15,8 @@ size = Vector3(0.14, 0.02, 20)
 size = Vector3(0.6, 0.45, 20)
 
 [sub_resource type="BoxMesh" id="BoxMesh_verge"]
-size = Vector3(14, 0.16, 20)
+; Wide enough that the houses at x = +/-8..10.5 stand on grass, not on skybox.
+size = Vector3(30, 0.16, 20)
 
 [node name="TrackChunk" type="StaticBody3D"]
 script = ExtResource("1_chunk")

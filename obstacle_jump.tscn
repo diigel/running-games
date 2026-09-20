@@ -1,31 +1,24 @@
 [gd_scene format=3 uid="uid://bwwd6nkdo2xeu"]
 
-; Ground-standing block — must be JUMPED over.
-; top = 1.2 world, jump apex = JUMP_FORCE^2/(2*GRAVITY) = 1.6 → 0.4 clearance.
+; Kampung theme: batu besar di jalan tanah — must be JUMPED over.
+; Collision is UNCHANGED: top = 1.2 world, jump apex = JUMP_FORCE^2/(2*GRAVITY) = 1.6 -> 0.4 clearance.
+; The rock art is picked at random from the nature kit and rescaled by
+; obstacle.gd to exactly prop_fit_size, which mirrors the collider below.
 
 [ext_resource type="Script" uid="uid://r0eo47im40ms" path="res://obstacle.gd" id="1_obs"]
+[ext_resource type="PackedScene" uid="uid://cc6lc1g16xfjb" path="res://glTF/Rock_Medium_1.gltf" id="2_rock1"]
+[ext_resource type="PackedScene" uid="uid://bbepthrqexvm4" path="res://glTF/Rock_Medium_2.gltf" id="3_rock2"]
+[ext_resource type="PackedScene" uid="uid://dfxc8jqranhk7" path="res://glTF/Rock_Medium_3.gltf" id="4_rock3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jump"]
 size = Vector3(2.5, 1.2, 1.0)
 
-[sub_resource type="BoxMesh" id="BoxMesh_jump"]
-size = Vector3(2.5, 1.2, 1.0)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jump_cap"]
-size = Vector3(2.7, 0.12, 1.2)
-
 [node name="ObstacleJump" type="Area3D" unique_id=1071663265]
 script = ExtResource("1_obs")
 accent_color = Color(0.95, 0.35, 0.15, 1)
+prop_scenes = [ExtResource("2_rock1"), ExtResource("3_rock2"), ExtResource("4_rock3")]
+prop_fit_size = Vector3(2.5, 1.2, 1.0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1229821190]
 position = Vector3(0, 0.6, 0)
 shape = SubResource("BoxShape3D_jump")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1681728045]
-position = Vector3(0, 0.6, 0)
-mesh = SubResource("BoxMesh_jump")
-
-[node name="Cap" type="MeshInstance3D" parent="."]
-position = Vector3(0, 1.22, 0)
-mesh = SubResource("BoxMesh_jump_cap")

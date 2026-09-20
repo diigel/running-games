@@ -1,18 +1,36 @@
 [gd_scene format=3 uid="uid://bobstacledbl1"]
 
-; Two-lane-wide ground block — must be JUMPED, or dodged into the free lane.
-; top = 1.2 world, same clearance as obstacle_jump (apex 1.6).
+; Kampung theme: pagar bambu roboh (fallen bamboo fence) spanning two lanes.
+; Must be JUMPED, or dodged into the free lane.
+; Collision is UNCHANGED: top = 1.2 world, same clearance as obstacle_jump (apex 1.6).
 
 [ext_resource type="Script" uid="uid://r0eo47im40ms" path="res://obstacle.gd" id="1_obs"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wide"]
 size = Vector3(6.5, 1.2, 1.0)
 
-[sub_resource type="BoxMesh" id="BoxMesh_wide"]
-size = Vector3(6.5, 1.2, 1.0)
+[sub_resource type="CylinderMesh" id="Cyl_rail"]
+top_radius = 0.09
+bottom_radius = 0.09
+height = 6.5
+radial_segments = 6
 
-[sub_resource type="BoxMesh" id="BoxMesh_wide_cap"]
-size = Vector3(6.7, 0.12, 1.2)
+[sub_resource type="CylinderMesh" id="Cyl_slat"]
+top_radius = 0.06
+bottom_radius = 0.06
+height = 1.15
+radial_segments = 5
+
+[sub_resource type="BoxMesh" id="BoxMesh_gedek"]
+size = Vector3(6.4, 1.0, 0.08)
+
+[sub_resource type="StandardMaterial3D" id="Mat_bamboo"]
+albedo_color = Color(0.62, 0.55, 0.3, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_gedek"]
+albedo_color = Color(0.5, 0.41, 0.24, 1)
+roughness = 1.0
 
 [node name="ObstacleWide" type="Area3D"]
 script = ExtResource("1_obs")
@@ -22,10 +40,37 @@ accent_color = Color(0.95, 0.75, 0.1, 1)
 position = Vector3(0, 0.6, 0)
 shape = SubResource("BoxShape3D_wide")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Woven" type="MeshInstance3D" parent="."]
 position = Vector3(0, 0.6, 0)
-mesh = SubResource("BoxMesh_wide")
+mesh = SubResource("BoxMesh_gedek")
+material_override = SubResource("Mat_gedek")
 
-[node name="Cap" type="MeshInstance3D" parent="."]
-position = Vector3(0, 1.22, 0)
-mesh = SubResource("BoxMesh_wide_cap")
+[node name="RailTop" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 1.13, 0)
+mesh = SubResource("Cyl_rail")
+material_override = SubResource("Mat_bamboo")
+
+[node name="RailBottom" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0.14, 0)
+mesh = SubResource("Cyl_rail")
+material_override = SubResource("Mat_bamboo")
+
+[node name="SlatA" type="MeshInstance3D" parent="."]
+position = Vector3(-2.3, 0.62, 0.07)
+mesh = SubResource("Cyl_slat")
+material_override = SubResource("Mat_bamboo")
+
+[node name="SlatB" type="MeshInstance3D" parent="."]
+position = Vector3(-0.78, 0.62, 0.07)
+mesh = SubResource("Cyl_slat")
+material_override = SubResource("Mat_bamboo")
+
+[node name="SlatC" type="MeshInstance3D" parent="."]
+position = Vector3(0.78, 0.62, 0.07)
+mesh = SubResource("Cyl_slat")
+material_override = SubResource("Mat_bamboo")
+
+[node name="SlatD" type="MeshInstance3D" parent="."]
+position = Vector3(2.3, 0.62, 0.07)
+mesh = SubResource("Cyl_slat")
+material_override = SubResource("Mat_bamboo")

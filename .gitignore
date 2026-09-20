@@ -7,3 +7,7 @@
 
 # Internal planning & AI docs
 docs/superpowers/
+
+# Local AI-tooling caches — not project source
+.pi-lens/
+.pi/

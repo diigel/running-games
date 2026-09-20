@@ -1,36 +1,54 @@
 [gd_scene format=3 uid="uid://bwwd6nkdtafwu"]
 
-; Overhead bar — must be SLID under.
-; bottom = 1.1 world, sliding player top = SLIDE_HEIGHT = 0.9 → 0.2 clearance.
-; Standing player top = 1.8 and jump apex 1.6 both intersect it → slide is the only way through.
+; Kampung theme: jemuran baju — must be SLID under.
+; Collision is UNCHANGED: bottom = 1.1 world, sliding player top = SLIDE_HEIGHT = 0.9 -> 0.2 clearance.
+; Standing player top = 1.8 and jump apex 1.6 both intersect it -> slide is the only way through.
+; The garments themselves are generated per spawn by jemuran.gd.
 
-[ext_resource type="Script" uid="uid://r0eo47im40ms" path="res://obstacle.gd" id="1_obs"]
+[ext_resource type="Script" path="res://jemuran.gd" id="1_jemuran"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_slide"]
 size = Vector3(2.5, 1.0, 1.0)
 
-[sub_resource type="BoxMesh" id="BoxMesh_slide"]
-size = Vector3(2.5, 1.0, 1.0)
+[sub_resource type="CylinderMesh" id="Cyl_bamboo"]
+top_radius = 0.07
+bottom_radius = 0.09
+height = 2.2
+radial_segments = 6
 
-[sub_resource type="BoxMesh" id="BoxMesh_post"]
-size = Vector3(0.18, 2.1, 0.18)
+[sub_resource type="CylinderMesh" id="Cyl_rope"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 2.9
+radial_segments = 5
+
+[sub_resource type="StandardMaterial3D" id="Mat_bamboo"]
+albedo_color = Color(0.57, 0.52, 0.28, 1)
+roughness = 0.85
+
+[sub_resource type="StandardMaterial3D" id="Mat_rope"]
+albedo_color = Color(0.72, 0.66, 0.5, 1)
+roughness = 1.0
 
 [node name="ObstacleSlide" type="Area3D" unique_id=1649898106]
-script = ExtResource("1_obs")
+script = ExtResource("1_jemuran")
 accent_color = Color(0.1, 0.75, 0.95, 1)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1433722096]
 position = Vector3(0, 1.6, 0)
 shape = SubResource("BoxShape3D_slide")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1431167340]
-position = Vector3(0, 1.6, 0)
-mesh = SubResource("BoxMesh_slide")
-
 [node name="PostL" type="MeshInstance3D" parent="."]
-position = Vector3(-1.34, 1.05, 0)
-mesh = SubResource("BoxMesh_post")
+position = Vector3(-1.42, 1.1, 0)
+mesh = SubResource("Cyl_bamboo")
+material_override = SubResource("Mat_bamboo")
 
 [node name="PostR" type="MeshInstance3D" parent="."]
-position = Vector3(1.34, 1.05, 0)
-mesh = SubResource("BoxMesh_post")
+position = Vector3(1.42, 1.1, 0)
+mesh = SubResource("Cyl_bamboo")
+material_override = SubResource("Mat_bamboo")
+
+[node name="Rope" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 2.1, 0)
+mesh = SubResource("Cyl_rope")
+material_override = SubResource("Mat_rope")

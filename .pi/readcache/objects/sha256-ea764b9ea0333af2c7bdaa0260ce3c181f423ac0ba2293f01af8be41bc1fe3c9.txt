@@ -8,11 +8,8 @@ const SPEED_INCREMENT: float = 0.05    # units/s² — 240s to reach max speed
 const CHUNK_LENGTH: float = 20.0
 const CHUNKS_AHEAD: int = 5
 const GRACE_CHUNKS: int = 2
-const CAM_OFFSET: Vector3 = Vector3(0, 4.2, 7.5)
-const CAM_LOOK_OFFSET: Vector3 = Vector3(0, 1.2, -8)
-const CAM_LERP: float = 8.0           # position smoothing — kills camera jitter on lane switch
-const CAM_FOV_BASE: float = 70.0
-const CAM_FOV_MAX: float = 84.0       # widens as speed ramps, for a sense of acceleration
+const CAM_OFFSET: Vector3 = Vector3(0, 5, 8)
+const CAM_LOOK_OFFSET: Vector3 = Vector3(0, 0, -5)
 
 var current_speed: float = START_SPEED
 var score: float = 0.0
@@ -28,7 +25,6 @@ var next_chunk_z: float = 0.0
 
 func _ready() -> void:
 	add_to_group("game_manager")
-	camera.global_position = player.global_position + CAM_OFFSET
 	# Pre-fill chunk pool ahead of player
 	for _i in range(CHUNKS_AHEAD):
 		_spawn_chunk()
@@ -46,13 +42,9 @@ func _process(delta: float) -> void:
 	score += abs(current_speed) * delta
 	hud.update_score(int(score))
 
-	# Camera trails the player: smoothed follow + speed-driven FOV
-	var target_pos: Vector3 = player.global_position + CAM_OFFSET
-	camera.global_position = camera.global_position.lerp(target_pos, min(1.0, CAM_LERP * delta))
+	# Camera follows player with fixed offset
+	camera.global_position = player.global_position + CAM_OFFSET
 	camera.look_at(player.global_position + CAM_LOOK_OFFSET, Vector3.UP)
-
-	var speed_ratio: float = inverse_lerp(START_SPEED, MAX_SPEED, current_speed)
-	camera.fov = lerp(CAM_FOV_BASE, CAM_FOV_MAX, speed_ratio)
 
 	# Maintain chunk pool: spawn when fewer than CHUNKS_AHEAD are ahead
 	var threshold: float = player.global_position.z - (CHUNK_LENGTH * CHUNKS_AHEAD)
@@ -66,7 +58,7 @@ func _spawn_chunk() -> void:
 	chunk.position = Vector3(0.0, -0.1, next_chunk_z)
 	next_chunk_z -= CHUNK_LENGTH
 	track_spawner.add_child(chunk)
-	chunk.setup(player, chunks_spawned < GRACE_CHUNKS, chunks_spawned)
+	chunk.setup(player, chunks_spawned < GRACE_CHUNKS)
 	chunks_spawned += 1
 
 

@@ -8,6 +8,15 @@ size = Vector3(10, 0.2, 20)
 [sub_resource type="BoxMesh" id="BoxMesh_floor"]
 size = Vector3(10, 0.2, 20)
 
+[sub_resource type="BoxMesh" id="BoxMesh_stripe"]
+size = Vector3(0.14, 0.02, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_curb"]
+size = Vector3(0.6, 0.45, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_verge"]
+size = Vector3(14, 0.16, 20)
+
 [node name="TrackChunk" type="StaticBody3D"]
 script = ExtResource("1_chunk")
 
@@ -16,3 +25,23 @@ shape = SubResource("BoxShape3D_floor")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_floor")
+
+[node name="Verge" type="MeshInstance3D" parent="."]
+position = Vector3(0, -0.12, 0)
+mesh = SubResource("BoxMesh_verge")
+
+[node name="StripeL" type="MeshInstance3D" parent="."]
+position = Vector3(-1.5, 0.101, 0)
+mesh = SubResource("BoxMesh_stripe")
+
+[node name="StripeR" type="MeshInstance3D" parent="."]
+position = Vector3(1.5, 0.101, 0)
+mesh = SubResource("BoxMesh_stripe")
+
+[node name="CurbL" type="MeshInstance3D" parent="."]
+position = Vector3(-4.7, 0.22, 0)
+mesh = SubResource("BoxMesh_curb")
+
+[node name="CurbR" type="MeshInstance3D" parent="."]
+position = Vector3(4.7, 0.22, 0)
+mesh = SubResource("BoxMesh_curb")

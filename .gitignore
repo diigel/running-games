@@ -11,3 +11,13 @@ docs/superpowers/
 # Local AI-tooling caches — not project source
 .pi-lens/
 .pi/
+
+# Blender working file + preview renders: the .glb is the committed artifact,
+# and Godot would otherwise try to import the .blend and demand a Blender path.
+blender/.out/
+blender/preview_*.png
+
+# Godot-side reference renders from tests/shot_player.gd
+.shots/
+blender/*.blend1
+blender/preview_*.png.import
